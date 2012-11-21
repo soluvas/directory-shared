@@ -45,16 +45,37 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>shared-i18n</artifactId>
+      <version>1.0.0-M13</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>shared-util</artifactId>
+      <version>1.0.0-M13</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>shared-asn1-api</artifactId>
+      <version>1.0.0-M13</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>shared-asn1-ber</artifactId>
+      <version>1.0.0-M13</version>
     </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>shared-ldap-model</artifactId>
+      <version>1.0.0-M13</version>
     </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>shared-ldap-extras-aci</artifactId>
+      <version>1.0.0-M13</version>
       <scope>test</scope>
     </dependency>
 
