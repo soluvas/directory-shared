@@ -329,6 +329,20 @@ public class SchemaEntityFactory implements EntityFactory
 
         // The FQCN
         String className = getFqcn( entry, SchemaConstants.SYNTAX_CHECKER );
+        // HACK: ApacheDS 1.5.x workaround
+        if (className.startsWith("org.apache.directory.shared.ldap.schema.")) {
+        	final String oldClassName = className;
+        	className = oldClassName.replace("org.apache.directory.shared.ldap.schema.syntaxCheckers.ACIItemSyntaxChecker", "org.apache.directory.shared.ldap.aci.ACIItemSyntaxChecker")
+        			.replace("org.apache.directory.shared.ldap.schema.", "org.apache.directory.shared.ldap.model.schema.")
+        			.replace("MHSORAddressSyntaxChecker", "MhsOrAddressSyntaxChecker")
+        			.replace("DSETypeSyntaxChecker", "DseTypeSyntaxChecker")
+        			.replace("DSAQualitySyntaxSyntaxChecker", "DsaQualitySyntaxSyntaxChecker")
+        			.replace("DLSubmitPermissionSyntaxChecker", "DlSubmitPermissionSyntaxChecker")
+        			.replace("DITStructureRuleDescriptionSyntaxChecker", "DitStructureRuleDescriptionSyntaxChecker")
+        			.replace("DITContentRuleDescriptionSyntaxChecker", "DitContentRuleDescriptionSyntaxChecker")
+        			.replace("DNSyntaxChecker", "DnSyntaxChecker");
+        	LOG.warn("Old ApacheDS 1.5.x SyntaxChecker detected in {}, replacing old '{}' with '{}'", oid, oldClassName, className);
+        }
 
         // The ByteCode
         Attribute byteCode = entry.get( MetaSchemaConstants.M_BYTECODE_AT );
@@ -518,6 +532,13 @@ public class SchemaEntityFactory implements EntityFactory
 
         // The FQCN
         String fqcn = getFqcn( entry, SchemaConstants.COMPARATOR );
+        // HACK: ApacheDS 1.5.x workaround
+        if (fqcn.startsWith("org.apache.directory.shared.ldap.schema.")) {
+        	final String oldFqcn = fqcn;
+        	fqcn = oldFqcn.replace("org.apache.directory.shared.ldap.schema.", "org.apache.directory.shared.ldap.model.schema.")
+        			.replace("UUIDComparator", "UuidComparator").replace("IntegerOrderingComparator", "IntegerComparator");
+        	LOG.warn("Old ApacheDS 1.5.x Comparator detected in {}, replacing old FQCN '{}' with '{}'", oid, oldFqcn, fqcn);
+        }
 
         // The ByteCode
         Attribute byteCode = entry.get( MetaSchemaConstants.M_BYTECODE_AT );
@@ -649,6 +670,12 @@ public class SchemaEntityFactory implements EntityFactory
 
         // The FQCN
         String className = getFqcn( entry, SchemaConstants.NORMALIZER );
+        // HACK: ApacheDS 1.5.x workaround
+        if (className.startsWith("org.apache.directory.shared.ldap.schema.")) {
+        	final String oldClassName = className;
+        	className = oldClassName.replace("org.apache.directory.shared.ldap.schema.", "org.apache.directory.shared.ldap.model.schema.");
+        	LOG.warn("Old ApacheDS 1.5.x Normalizer detected in {}, replacing old '{}' with '{}'", oid, oldClassName, className);
+        }
 
         // The ByteCode
         Attribute byteCode = entry.get( MetaSchemaConstants.M_BYTECODE_AT );
